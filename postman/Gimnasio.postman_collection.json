@@ -1,0 +1,46 @@
+{
+  "info": {
+    "name": "Gimnasio API",
+    "description": "CRUD de socios y situaciones especiales del ejercicio de gimnasio.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:9090" },
+    { "key": "socioId", "value": "1" },
+    { "key": "idInexistente", "value": "999999" }
+  ],
+  "item": [
+    { "name": "Listar socios", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio" } },
+    { "name": "Traer socio", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/{{socioId}}" } },
+    { "name": "Traer socio inexistente (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/{{idInexistente}}" } },
+    {
+      "name": "Crear socio",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Carlos Mena\",\n  \"plan\": \"mensual\",\n  \"mensualidad\": 30.0,\n  \"activo\": true\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/api/socio"
+      }
+    },
+    {
+      "name": "Editar socio",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Carlos Mena\",\n  \"plan\": \"mensual\",\n  \"mensualidad\": 30.0,\n  \"activo\": true\n}", "options": { "raw": { "language": "json" } } },
+        "url": "{{baseUrl}}/api/socio/{{socioId}}"
+      }
+    },
+    { "name": "Eliminar socio", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/socio/{{socioId}}" } },
+    { "name": "Eliminar socio inexistente (404)", "request": { "method": "DELETE", "url": "{{baseUrl}}/api/socio/{{idInexistente}}" } },
+    { "name": "Listar activos", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/activos" } },
+    { "name": "Buscar por plan", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/plan/mensual" } },
+    { "name": "Ingresos de socios activos", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/ingresos" } },
+    { "name": "Ingresos agrupados por plan", "request": { "method": "GET", "url": "{{baseUrl}}/api/socio/ingresos-por-plan" } },
+    { "name": "Activar socio", "request": { "method": "PUT", "url": "{{baseUrl}}/api/socio/{{socioId}}/activar" } },
+    { "name": "Activar socio inexistente (404)", "request": { "method": "PUT", "url": "{{baseUrl}}/api/socio/{{idInexistente}}/activar" } },
+    { "name": "Activar socio ya activo (409)", "request": { "method": "PUT", "url": "{{baseUrl}}/api/socio/{{socioId}}/activar" } },
+    { "name": "Desactivar socio", "request": { "method": "PUT", "url": "{{baseUrl}}/api/socio/{{socioId}}/desactivar" } },
+    { "name": "Desactivar socio ya inactivo (409)", "request": { "method": "PUT", "url": "{{baseUrl}}/api/socio/{{socioId}}/desactivar" } }
+  ]
+}
